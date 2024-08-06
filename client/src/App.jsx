@@ -1,7 +1,10 @@
 import "./App.css";
+import Apptour from "../Component/Apptourist";
+import React from "react";
+import "./index.css";
 
 function App() {
-  return <div className="App">{/* Start coding here */}</div>;
+  return <Apptour />;
 }
 
 export default App;
