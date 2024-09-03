@@ -4,27 +4,27 @@ import axios from "axios";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
 function Apptour() {
-  const [tourlist, Settourlist] = useState([]);
-  const [searchinput, Setsearchinput] = useState("");
+  const [tourlist, setTourList] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
 
   const searchtourist = async (text) => {
     try {
       const response = await axios.get(
         `http://localhost:4001/trips?keywords=${text}`
       );
-      Settourlist(response.data.data);
+      setTourList(response.data.data);
     } catch (error) {
       console.log("Error:", error);
     }
   };
 
   useEffect(() => {
-    if (searchinput) {
-      searchtourist(searchinput);
+    if (searchInput) {
+      setTourList(searchInput);
     } else {
-      Settourlist(trips);
+      setTourList(trips);
     }
-  }, [searchinput]);
+  }, [searchInput]);
 
   const copyToClipboard = (url) => {
     navigator.clipboard
@@ -51,8 +51,8 @@ function Apptour() {
           name="fname"
           className="w-[500px] border-solid rounded-lg border-b-4 text-center mt-3"
           placeholder="หาที่เที่ยวแล้วไปกัน..."
-          value={searchinput}
-          onChange={(event) => Setsearchinput(event.target.value)}
+          value={searchInput}
+          onChange={(event) => setSearchInput(event.target.value)}
         ></input>
       </div>
 
@@ -98,7 +98,7 @@ function Apptour() {
                           key={index}
                           className="underline text-orange-700"
                           onClick={(texts) =>
-                            Setsearchinput((prevText) =>
+                            setSearchInput((prevText) =>
                               prevText ? `${prevText} ${tag}` : tag
                             )
                           }
